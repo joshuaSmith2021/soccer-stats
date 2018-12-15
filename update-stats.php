@@ -5,9 +5,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   ];
   $request_body = file_get_contents('php://input');
   $data_file = fopen('player_stats.json', 'w') or die('Unable to open file');
-  fwrite($data_file, $json->new_data);
+  fwrite($data_file, htmlspecialchars_decode($request_body->new_data));
   fclose($data_file);
-  echo $request_body;
+  echo htmlspecialchars_decode($request_body->new_data);
 } else {
   echo 'Method not allowed.';
 }
