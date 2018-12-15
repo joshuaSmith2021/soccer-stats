@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $request_body = file_get_contents('php://input');
   $new_data = substr(utf8_decode(urldecode($request_body)), 9);
   $data_file = fopen('player_stats.json', 'w') or die('Unable to open file');
-  fwrite($data_file, $new_data);
+  fwrite($data_file, $new_data) or die('Unable to write to file');
   fclose($data_file);
   echo $new_data;
 } else {
