@@ -66,17 +66,9 @@ if __name__ == '__main__':
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
     service = get_authenticated_service()
 
-    old_data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
-    player_count = old_data['player_count']
-    games_played = old_data['games_played']
-    player_data = get_player_data(service)
-
-    payload = {
-        'player_data': player_data,
-        'player_count': player_count,
-        'games_played': games_played
-    }
-    request_string = json.dumps(payload)
+    data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
+    data['player_data'] = get_player_data(service)
+    request_string = json.dumps(data)
 
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=6f070951-0da6-4349-ac6f-4b305875a6ab', data=request_string)
     print('Request String:')
