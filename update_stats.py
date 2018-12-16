@@ -51,14 +51,14 @@ def get_player_data(service):
             row = result['values'][0]
             player_data.append({
                 'playerName': row[0],
-                'goals': row[1],
-                'assists': row[2],
-                'points': row[3]
+                'goals': int(row[1]),
+                'assists': int(row[2]),
+                'points': int(row[3])
             })
             current_row += 1
         else:
             break
-    return json.dumps(player_data)
+    return player_data
 
 if __name__ == '__main__':
     # When running locally, disable OAuthlib's HTTPs verification. When
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     player_count = old_data['player_count']
     games_played = old_data['games_played']
     player_data = get_player_data(service)
-    
+
     payload = {
         'player_data': player_data,
         'player_count': player_count,
