@@ -6,7 +6,7 @@
     <title>Enter Stats Page</title>
     <link rel="stylesheet" href="https://smith2021.github.io/hermes/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="../main.css">
   </head>
   <body>
 <?php
