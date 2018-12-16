@@ -66,7 +66,7 @@ if __name__ == '__main__':
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
     service = get_authenticated_service()
 
-    old_data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
+    #old_data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
     #player_count = old_data['player_count']
     #games_played = old_data['games_played']
 
