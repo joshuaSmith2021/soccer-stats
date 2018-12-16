@@ -1,7 +1,7 @@
 from json import loads, dumps
-from requests import post
+from requests import post, get
 
-data = loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
+data = loads(get('https://stat-display.herokuapp.com/player_stats.json').text)
 
 print('How many games have been played?')
 data['games_played'] = int(raw_input())
