@@ -77,7 +77,6 @@ if __name__ == '__main__':
         'games_played': games_played
     }
     request_string = json.dumps(payload)
-    request_string = request_string[1:len(request_string) - 1].replace('\\', '')
 
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=6f070951-0da6-4349-ac6f-4b305875a6ab', data=request_string)
     print('Request String:')
