@@ -7,9 +7,10 @@ if (in_array($_GET['key'], $approved_keys)) {
   <html>
   <head>
     <title>JV Stats</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://smith2021.github.io/hermes/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"/>
+    <link rel="stylesheet" href="https://smith2021.github.io/hermes/w3.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="main.css"/>
   </head>
   <body>
     <div class="w3-padding roboto">
