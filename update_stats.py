@@ -72,7 +72,7 @@ if __name__ == '__main__':
     #games_played = old_data['games_played']
 
     player_data = get_player_data(service)
-    player_data = playerData[1:len(playerData) - 1].replace('\\', '')
+    player_data = player_data[1:len(player_data) - 1].replace('\\', '')
 
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=6f070951-0da6-4349-ac6f-4b305875a6ab', data={
         'new_data': player_data
