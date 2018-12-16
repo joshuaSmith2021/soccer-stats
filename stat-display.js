@@ -102,3 +102,5 @@ http.onreadystatechange = function () {
     buildPage();
   }
 };
+http.open('GET', 'player_stats.json');
+http.send();
