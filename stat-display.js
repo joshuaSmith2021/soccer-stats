@@ -4,9 +4,9 @@ var playerData = [];
 var gamesPlayed = 0;
 var playerCount = 0;
 
-const totalGoals = 0;
-const totalAssists = 0;
-const totalPoints = 0;
+var totalGoals = 0;
+var totalAssists = 0;
+var totalPoints = 0;
 
 function findTotals () {
   totalGoals = (function () {
