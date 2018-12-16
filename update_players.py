@@ -1,5 +1,5 @@
 from json import dumps, loads
-from requests import post
+from requests import post, get
 
 data = loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
 
