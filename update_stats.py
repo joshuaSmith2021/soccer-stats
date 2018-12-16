@@ -20,6 +20,9 @@ SECRET_DATA = json.loads(open(CLIENT_SECRETS_FILE).read())['installed']
 OAUTH_TOKENS_FILE = '../oauth.json'
 OAUTH_TOKENS = json.loads(open(OAUTH_TOKENS_FILE).read())
 
+# get update stats key
+UPDATE_KEY = json.loads(open('../update_key.json').read())['key']
+
 # This OAuth 2.0 access scope allows for full read/write access to the
 # authenticated user's account and requires requests to use an SSL connection.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
@@ -70,7 +73,7 @@ if __name__ == '__main__':
     data['player_data'] = get_player_data(service)
     request_string = json.dumps(data)
 
-    update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=6f070951-0da6-4349-ac6f-4b305875a6ab', data=request_string)
+    update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=' + UPDATE_KEY, data=request_string)
     print('Request String:')
     print('=' * 20)
     print(request_string)
