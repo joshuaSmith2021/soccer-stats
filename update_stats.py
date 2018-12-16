@@ -73,11 +73,9 @@ if __name__ == '__main__':
     player_data = get_player_data(service)
 
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=6f070951-0da6-4349-ac6f-4b305875a6ab', data={
-        'new_data': {
-            'player_data': player_data,
-            'player_count': player_count,
-            'games_played': games_played
-        }
+        'player_data': player_data,
+        'player_count': player_count,
+        'games_played': games_played
     })
     print(player_data)
     print(update_request.status_code)
