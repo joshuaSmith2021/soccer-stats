@@ -11,12 +11,14 @@
   <body>
 <?php
 if ($_GET['failed'] == 'true') {
-  echo '<p class="w3-padding w3-text-red roboto w3-xlarge">Incorrect key. Please try again.</p>\n';
+  echo '<p class="w3-padding w3-text-red roboto w3-xlarge">Incorrect key. Please try again.</p>';
 }
 ?>
-    <input type="text" class="w3-input roboto" id="keyInput" placeholder="Access key"/>
-    <br/>
-    <button class="raised roboto w3-blue" id="submitKey">Submit</button>
+    <div class="w3-padding">
+      <input type="text" class="w3-input roboto" id="keyInput" placeholder="Access key"/>
+      <br/>
+      <button class="raised roboto w3-blue" id="submitKey">Submit</button>
+    </div>
     <script type="text/javascript">
 document.getElementById('submitKey').addEventListener('click', function () {
   const userKey = document.getElementById('keyInput').value;
