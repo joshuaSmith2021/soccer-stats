@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $approved_keys = [
-    '6f070951-0da6-4349-ac6f-4b305875a6ab'
+    '4ef04b98-df5e-4165-840f-10a01df45eea'
   ];
   if (in_array($_GET['key'], $approved_keys)) {
     $request_body = file_get_contents('php://input');
