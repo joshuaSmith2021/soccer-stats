@@ -2,7 +2,7 @@ from json import dumps, loads
 from requests import post, get
 
 # get update stats key
-UPDATE_KEY = json.loads(open('../update_key.json').read())['key']
+UPDATE_KEY = loads(open('../update_key.json').read())['key']
 
 data = loads(get('https://stat-display.herokuapp.com/player_stats.json').text)
 
