@@ -11,10 +11,11 @@
   <body>
 <?php
 if ($_GET['failed'] == 'true') {
-  echo '<p class="w3-text-red">Incorrect key. Please try again.</p>';
+  echo '<p class="w3-padding w3-text-red roboto w3-xlarge">Incorrect key. Please try again.</p>\n';
 }
 ?>
     <input type="text" class="w3-input roboto" id="keyInput" placeholder="Access key"/>
+    <br/>
     <button class="raised roboto w3-blue" id="submitKey">Submit</button>
     <script type="text/javascript">
 document.getElementById('submitKey').addEventListener('click', function () {
