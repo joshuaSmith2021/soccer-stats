@@ -12,6 +12,8 @@
 <?php
 if ($_GET['failed'] == 'true') {
   echo '<p class="w3-padding w3-text-red roboto w3-xlarge">Incorrect key. Please try again.</p>';
+} else {
+  echo '<p class="w3-padding roboto w3-xlarge">Please enter the access key to the stats page.</p>';
 }
 ?>
     <div class="w3-padding">
