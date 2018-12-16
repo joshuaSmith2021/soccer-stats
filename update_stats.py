@@ -72,6 +72,6 @@ if __name__ == '__main__':
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=6f070951-0da6-4349-ac6f-4b305875a6ab', data={
         'new_data': json.dumps(playerData)
     })
-    print(playerData)
+    print(json.dumps(playerData))
     print(update_request.status_code)
     print(update_request.text)
