@@ -1,9 +1,13 @@
 # Sample Python code for user authorization
 
+print('Beginning imports')
+
 import os
 import json
 
+print('Importing requests')
 import requests
+print('Requests imported')
 
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -33,6 +37,7 @@ API_VERSION = 'v4'
 spreadsheet_id = '14rF_MvfDqSpk5C_lifOZqlOjvmdrJkxM4K2RgNaErB4'
 
 def get_authenticated_service():
+    print('Getting Google service')
     g_credentials = Credentials(
         OAUTH_TOKENS['token'],
         refresh_token = OAUTH_TOKENS['refresh_token'],
@@ -45,10 +50,13 @@ def get_authenticated_service():
 def get_player_data(service):
     current_row = 2
     player_data = []
+    print('Getting data')
     while True:
+        print('Iteration #' + str(current_row - 1))
         result = service.spreadsheets().values().get(
             spreadsheetId=spreadsheet_id,
             range='Sheet1!' + str(current_row) + ':' + str(current_row)).execute()
+        print('Row received')
         numRows = result.get('values') if result.get('values') is not None else None
         if numRows:
             row = result['values'][0]
@@ -73,12 +81,10 @@ if __name__ == '__main__':
     data['player_data'] = get_player_data(service)
     request_string = json.dumps(data)
 
+    print('Sending request')
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=' + UPDATE_KEY, data=request_string)
-    print('Request String:')
-    print('=' * 20)
-    print(request_string)
-    print('')
+    print('Reponse code:')
     print(update_request.status_code)
-    print('Response:')
     print('=' * 20)
+    print('Response:')
     print(update_request.text)
