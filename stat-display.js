@@ -1,5 +1,3 @@
-const http = new XMLHttpRequest();
-
 var playerData = [];
 var gamesPlayed = 0;
 var playerCount = 0;
@@ -91,6 +89,8 @@ function buildPage () {
     });
   }
 }
+
+const http = new XMLHttpRequest();
 
 http.onreadystatechange = function () {
   if (this.readyState === 4 && this.status === 200) {
