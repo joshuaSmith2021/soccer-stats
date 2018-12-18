@@ -32,6 +32,27 @@ function findTotals () {
   })();
 }
 
+function getLeaders () {
+  var highestGoals = 0;
+  var highestAssists = 0;
+  for (let i = 0; i < playerData.length; i++) {
+    if (playerData[i].goals >= highestGoals) {
+      highestGoals = playerData[i].goals;
+    }
+    if (playerData[i].assists >= highestAssists) {
+      highestAssists = playerData[i].assists;
+    }
+  }
+  for (let i = 0; i < playerData.length; i++) {
+    if (playerData[i].goals === highestGoals) {
+      playerData[i].mostGoals = true;
+    }
+    if (playerData[i].assists === highestAssists) {
+      playerData[i].mostAssists = true;
+    }
+  }
+}
+
 function buildPage () {
   const statsContainer = document.getElementById('statsContainer');
   for (let i = 0; i < playerData.length; i++) {
@@ -39,7 +60,17 @@ function buildPage () {
       statsContainer.innerHTML += '<div class="w3-row">';
     }
     statsContainer.innerHTML += '<div class="w3-col l4 m12">' +
-          '<h4 class="w3-center">' + playerData[i].playerName + '</h4>' +
+          '<h4 class="w3-center">' + playerData[i].playerName + (function () {
+      if (playerData[i].mostGoals && playerData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      } else if (playerData[i].mostGoals) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li></ul></i>';
+      } else if (playerData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      } else {
+        return '';
+      }
+    })() + '</h4>' +
           '<canvas class="playerDisplay"></canvas>' +
         '</div>';
     if ((i + 1) % 3 === 0) {
@@ -99,6 +130,7 @@ http.onreadystatechange = function () {
     gamesPlayed = allData.games_played;
     playerCount = allData.player_count;
     findTotals();
+    getLeaders();
     buildPage();
   }
 };

@@ -36,3 +36,26 @@
   line-height: 36px;
   vertical-align: middle;
 }
+
+.hover-container {
+  cursor: pointer;
+}
+
+.hover-container ul {
+  display: none;
+  font-family: Roboto;
+  list-style-type: none;
+  margin: auto;
+  padding: 5px;
+  color: #ffffff;
+  background-color: #000000;
+  font-weight: 400;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.hover-container:hover ul, .hover-container:focus ul {
+  display: block;
+  position: absolute;
+  float: right;
+}
