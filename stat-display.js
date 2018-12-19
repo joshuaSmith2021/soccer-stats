@@ -157,9 +157,9 @@ function buildTable (newData) {
       '<td>' + newData[i].goals + '</td>' +
       '<td>' + newData[i].assists + '</td>' +
       '<td>' + newData[i].points + '</td>' +
-      '<td>' + newData[i].goals / gamesPlayed + '</td>' +
-      '<td>' + newData[i].assists / gamesPlayed + '</td>' +
-      '<td>' + newData[i].points / gamesPlayed + '</td>';
+      '<td>' + Math.round(newData[i].goals / gamesPlayed * 1000) / 1000 + '</td>' +
+      '<td>' + Math.round(newData[i].assists / gamesPlayed * 1000) / 1000 + '</td>' +
+      '<td>' + Math.round(newData[i].points / gamesPlayed * 1000) / 1000 + '</td>';
   }
   tableDisplay.innerHTML += '<tr>' +
     '<td><b>Total</b></td>' +
