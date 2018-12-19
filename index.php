@@ -26,7 +26,7 @@ if (in_array($_GET['key'], $approved_keys)) {
   </div>
   <div class="w3-padding roboto">
     <h2>Stats By Player</h2>
-    <h6>Only players with at least one goals or one assist are shown.</h6>
+    <h6>Only players with at least one goal or one assist are shown.</h6>
     <div class="tab" id="radarviewSection">
       <div id="statsContainer"></div>
     </div>
