@@ -161,6 +161,15 @@ function tableSetup () {
       '<td>' + playerData[i].assists / gamesPlayed + '</td>' +
       '<td>' + playerData[i].points / gamesPlayed + '</td>';
   }
+  tableDisplay.innerHTML += '<tr>' +
+    '<td><b>Total</b></td>' +
+    '<td><b>' + totalGoals + '</b></td>' +
+    '<td><b>' + totalAssists + '</b></td>' +
+    '<td><b>' + totalPoints + '</b></td>' +
+    '<td>---</td>' +
+    '<td>---</td>' +
+    '<td>---</td>' +
+    '</tr>';
 }
 
 function graphSetup () {
