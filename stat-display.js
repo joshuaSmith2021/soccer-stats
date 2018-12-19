@@ -53,13 +53,30 @@ function getLeaders () {
   }
 }
 
-function buildPage () {
+function setupTabs () {
+  for (let i = 0; i < document.getElementsByClassName('tabbutton').length; i++) {
+    document.getElementsByClassName('tabbutton')[i].addEventListener('click', function (element) {
+      for (let j = 0; j < document.getElementsByClassName('tabbutton').length; j++) {
+        document.getElementsByClassName('tabbutton')[j].classList.remove('selected');
+      }
+      this.classList.add('selected');
+      for (let k = 0; k < document.getElementsByClassName('tab').length; k++) {
+        document.getElementsByClassName('tab')[k].style.display = 'none';
+      }
+      document.getElementById(this.innerText.replace(/\s+/g, '').toLowerCase() + 'Section').style.display = 'block';
+    });
+  }
+}
+
+function radarSetup () {
   const statsContainer = document.getElementById('statsContainer');
-  for (let i = 0; i < playerData.length; i++) {
+  var containerString = '';
+  var i = 0;
+  for (i = 0; i < playerData.length; i++) {
     if (i % 3 === 0) {
-      statsContainer.innerHTML += '<div class="w3-row">';
+      containerString += '<div class="w3-row">';
     }
-    statsContainer.innerHTML += '<div class="w3-col l4 m12">' +
+    containerString += '<div class="w3-col l4 m12">' +
           '<h4 class="w3-center">' + playerData[i].playerName + (function () {
       if (playerData[i].mostGoals && playerData[i].mostAssists) {
         return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
@@ -73,15 +90,105 @@ function buildPage () {
     })() + '</h4>' +
           '<canvas class="playerDisplay"></canvas>' +
         '</div>';
-    if ((i + 1) % 3 === 0) {
-      statsContainer.innerHTML += '</div>'
+    if ((i + 1) % 3 === 0 || i + 1 === playerData.length) {
+      containerString += '</div>'
     }
   }
+  statsContainer.innerHTML = containerString;
   const playerDisplays = document.getElementsByClassName('playerDisplay');
   for (let i = 0; i < playerData.length; i++) {
     let ctx = playerDisplays[i].getContext('2d');
     let playerChart = new Chart(ctx, {
       type: 'radar',
+      data: {
+        labels: ['Goals', 'Assists', 'Points', 'Goals per Game', 'Assists per Game', 'Points per Game'],
+        datasets: [
+          {//#d01717
+            label: playerData[i].playerName,
+            backgroundColor: 'rgba(224, 23, 23, 0.2)',
+            borderColor: 'rgb(224, 23, 23)',
+            data: (function () {
+              let current = [];
+              current.push(playerData[i].goals);
+              current.push(playerData[i].assists);
+              current.push(playerData[i].points);
+              current.push(playerData[i].goals / gamesPlayed);
+              current.push(playerData[i].assists / gamesPlayed);
+              current.push(playerData[i].points / gamesPlayed);
+              return current;
+            })()
+          },
+          {
+            label: 'Average Player',
+            backgroundColor: 'rgb(23, 43, 208, 0.2)',
+            borderColor: 'rgb(23, 43, 208)',
+            data: (function () {
+              let current = [];
+              current.push(totalGoals / playerCount);
+              current.push(totalAssists / playerCount);
+              current.push(totalPoints / playerCount);
+              current.push(totalGoals / playerCount / gamesPlayed);
+              current.push(totalAssists / playerCount / gamesPlayed);
+              current.push(totalPoints / playerCount / gamesPlayed);
+              return current;
+            })()
+          }
+        ]
+      }
+    });
+  }
+}
+
+function tableSetup () {
+  const tableDisplay = document.getElementById('tableDisplay');
+  for (let i = 0; i < playerData.length; i++) {
+    tableDisplay.innerHTML += '<tr>' +
+      '<td>' + playerData[i].playerName + (function () {
+      if (playerData[i].mostGoals && playerData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      } else if (playerData[i].mostGoals) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li></ul></i>';
+      } else if (playerData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      } else {
+        return '';
+      }
+    })() + '</td>' +
+      '<td>' + playerData[i].goals + '</td>' +
+      '<td>' + playerData[i].assists + '</td>' +
+      '<td>' + playerData[i].points + '</td>' +
+      '<td>' + playerData[i].goals / gamesPlayed + '</td>' +
+      '<td>' + playerData[i].assists / gamesPlayed + '</td>' +
+      '<td>' + playerData[i].points / gamesPlayed + '</td>';
+  }
+}
+
+function graphSetup () {
+  var containerString = '';
+  for (let i = 0; i < playerData.length; i++) {
+    if (i % 3 === 0) {
+      containerString += '<div class="w3-row">'
+    }
+    containerString += '<div class="w3-col l4 m12"><h4 class="w3-center">' + playerData[i].playerName + (function () {
+      if (playerData[i].mostGoals && playerData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      } else if (playerData[i].mostGoals) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li></ul></i>';
+      } else if (playerData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      } else {
+        return '';
+      }
+    })() + '</h4><canvas id="graph' + i + '"></canvas></div>';
+    if ((i + 1) % 3 === 0 || (i + 1) === playerData.length) {
+      containerString += '</div>';
+    }
+  }
+  document.getElementById('graphContainer').innerHTML = containerString;
+  for (let i = 0; i < playerData.length; i++) {
+    let ctx = document.getElementById('graph' + i).getContext('2d');
+    let playerChart = new Chart(ctx, {
+      type: 'bar',
       data: {
         labels: ['Goals', 'Assists', 'Points', 'Goals per Game', 'Assists per Game', 'Points per Game'],
         datasets: [
@@ -131,7 +238,10 @@ http.onreadystatechange = function () {
     playerCount = allData.player_count;
     findTotals();
     getLeaders();
-    buildPage();
+    setupTabs();
+    radarSetup();
+    tableSetup();
+    graphSetup();
   }
 };
 http.open('GET', 'player_stats.json');
