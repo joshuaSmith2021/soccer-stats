@@ -139,27 +139,27 @@ function radarSetup () {
   }
 }
 
-function tableSetup () {
+function buildTable (newData) {
   const tableDisplay = document.getElementById('tableDisplay');
-  for (let i = 0; i < playerData.length; i++) {
+  for (let i = 0; i < newData.length; i++) {
     tableDisplay.innerHTML += '<tr>' +
-      '<td>' + playerData[i].playerName + (function () {
-      if (playerData[i].mostGoals && playerData[i].mostAssists) {
-        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
-      } else if (playerData[i].mostGoals) {
-        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + playerData[i].goals + ')</li></ul></i>';
-      } else if (playerData[i].mostAssists) {
-        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Most Assists (' + playerData[i].assists + ')</li></ul></i>';
+      '<td>' + newData[i].playerName + (function () {
+      if (newData[i].mostGoals && newData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + newData[i].goals + ')</li><li>Most Assists (' + newData[i].assists + ')</li></ul></i>';
+      } else if (newData[i].mostGoals) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Top Scorer (' + newData[i].goals + ')</li></ul></i>';
+      } else if (newData[i].mostAssists) {
+        return ' <i class="fa fa-trophy w3-text-yellow hover-container"><ul><li>Most Assists (' + newData[i].assists + ')</li></ul></i>';
       } else {
         return '';
       }
     })() + '</td>' +
-      '<td>' + playerData[i].goals + '</td>' +
-      '<td>' + playerData[i].assists + '</td>' +
-      '<td>' + playerData[i].points + '</td>' +
-      '<td>' + playerData[i].goals / gamesPlayed + '</td>' +
-      '<td>' + playerData[i].assists / gamesPlayed + '</td>' +
-      '<td>' + playerData[i].points / gamesPlayed + '</td>';
+      '<td>' + newData[i].goals + '</td>' +
+      '<td>' + newData[i].assists + '</td>' +
+      '<td>' + newData[i].points + '</td>' +
+      '<td>' + newData[i].goals / gamesPlayed + '</td>' +
+      '<td>' + newData[i].assists / gamesPlayed + '</td>' +
+      '<td>' + newData[i].points / gamesPlayed + '</td>';
   }
   tableDisplay.innerHTML += '<tr>' +
     '<td><b>Total</b></td>' +
@@ -170,6 +170,41 @@ function tableSetup () {
     '<td>---</td>' +
     '<td>---</td>' +
     '</tr>';
+}
+
+function tableSetup () {
+  buildTable(playerData);
+  const triggers = document.getElementsByClassName('dataCol');
+  const categories = {
+    'player': false,
+    'goals': 'goals',
+    'assists': 'assists',
+    'points': 'points',
+    'goalsgame': 'goals',
+    'assistsgame': 'assists',
+    'pointsgame': 'points'
+  };
+  for (let i = 0; i < triggers.length; i++) {
+    triggers[i].addEventListener('click', function () {
+      if (categories[this.innerText.toLowerCase().replace('/', '')]) {
+        sortTable(categories[this.innerText.toLowerCase().replace('/', '')]);
+      }
+    });
+  }
+}
+
+function sortByKey(array, key) {
+  return array.sort(function(a, b) {
+    var x = a[key]; var y = b[key];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  }).reverse();
+}
+
+function sortTable (category) {
+  let table = document.getElementById('tableDisplay');
+  table.innerHTML = '';
+  const ordered = sortByKey(playerData, category);
+  buildTable(ordered);
 }
 
 function graphSetup () {

@@ -34,13 +34,13 @@ if (in_array($_GET['key'], $approved_keys)) {
       <table class="w3-table w3-bordered w3-striped w3-hoverable w3-large">
         <thead>
           <tr>
-            <th>Player</th>
-            <th>Goals</th>
-            <th>Assists</th>
-            <th>Points</th>
-            <th>Goals/Game</th>
-            <th>Assists/Game</th>
-            <th>Points/Game</th>
+            <th class="dataCol">Player</th>
+            <th class="dataCol">Goals</th>
+            <th class="dataCol">Assists</th>
+            <th class="dataCol">Points</th>
+            <th class="dataCol">Goals/Game</th>
+            <th class="dataCol">Assists/Game</th>
+            <th class="dataCol">Points/Game</th>
           </tr>
         </thead>
         <tbody id="tableDisplay"></tbody>
