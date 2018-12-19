@@ -51,7 +51,7 @@ if (in_array($_GET['key'], $approved_keys)) {
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-  <script src="stat-display.min.js"></script>
+  <script src="stat-display.js"></script>
 </body>
 </html>';
 } else {
