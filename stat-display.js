@@ -187,6 +187,10 @@ function tableSetup () {
   for (let i = 0; i < triggers.length; i++) {
     triggers[i].addEventListener('click', function () {
       if (categories[this.innerText.toLowerCase().replace('/', '')]) {
+        for (let j = 0; j < triggers.length; j++) {
+          triggers[j].style.color = '#000000';
+        }
+        this.style.color = '#3399ff';
         sortTable(categories[this.innerText.toLowerCase().replace('/', '')]);
       }
     });
