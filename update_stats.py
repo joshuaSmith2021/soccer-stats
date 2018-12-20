@@ -34,7 +34,7 @@ API_SERVICE_NAME = 'sheets'
 API_VERSION = 'v4'
 
 # Spreadsheet data
-spreadsheet_id = '14rF_MvfDqSpk5C_lifOZqlOjvmdrJkxM4K2RgNaErB4'
+spreadsheet_id = '1oF3lCVupGU_zSNX2gZv2IeeDQ05r3ttxFPyx5VYpT9Y'
 
 def get_authenticated_service():
     print('Getting Google service')
@@ -55,7 +55,7 @@ def get_player_data(service):
         print('Iteration #' + str(current_row - 1))
         result = service.spreadsheets().values().get(
             spreadsheetId=spreadsheet_id,
-            range='Sheet1!' + str(current_row) + ':' + str(current_row)).execute()
+            range='goalsandassists!' + str(current_row) + ':' + str(current_row)).execute()
         print('Row received')
         numRows = result.get('values') if result.get('values') is not None else None
         if numRows:
