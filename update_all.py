@@ -1,8 +1,3 @@
-print('How many games have been played?')
-games_played = raw_input()
-print('How many players are on the team?')
-player_count = raw_input()
-
 print('Beginning imports')
 
 import os
@@ -38,6 +33,44 @@ API_VERSION = 'v4'
 
 # Spreadsheet data
 spreadsheet_id = '1oF3lCVupGU_zSNX2gZv2IeeDQ05r3ttxFPyx5VYpT9Y'
+
+def get_data(service, spreadsheet_id, sheet_name, start_row):
+    get_letter = lambda x: chr(ord('a') + x).upper()
+    current_row = start_row
+    all_data = []
+    # First get column names
+    column_names = []
+    current_column = 0
+    while True:
+        current_cell = get_letter(current_column) + str(current_row)
+        print('Getting cell ' + current_cell)
+        result = service.spreadsheets().values().get(
+            spreadsheetId=spreadsheet_id,
+            range=sheet_name + '!' + current_cell + ':' + current_cell).execute()
+
+        print('Cell received')
+        data_present = result.get('values') if result.get('values') is not None else None
+        if data_present:
+            column_names.append(result['values'][0][0])
+        else:
+            current_row += 1
+            break
+
+    while True:
+        print('Getting row ' + str(current_row))
+        result = service.spreadsheets().values().get(
+            spreadsheetId=spreadsheet_id,
+            range=sheet_name + '!' + str(current_row) + ':' + str(current_row)).execute()
+        data_present = result.get('values') if result.get('values') is not None else None
+        if data_present:
+            current_player = {}
+            for i in range(len(column_names)):
+                current_player[column_names[i]] = result['values'][0][i]
+            all_data.append(current_player)
+        else:
+            break
+    return all_data
+
 
 def get_authenticated_service():
     print('Getting Google service')
@@ -79,6 +112,12 @@ if __name__ == '__main__':
     # When running locally, disable OAuthlib's HTTPs verification. When
     # running in production *do not* leave this option enabled.
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+    print('How many games have been played?')
+    games_played = raw_input()
+    print('How many players are on the team?')
+    player_count = raw_input()
+
     service = get_authenticated_service()
 
     data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
