@@ -52,6 +52,7 @@ def get_data(service, spreadsheet_id, sheet_name, start_row):
         data_present = result.get('values') if result.get('values') is not None else None
         if data_present:
             column_names.append(result['values'][0][0])
+            current_column += 1
         else:
             current_row += 1
             break
@@ -67,6 +68,7 @@ def get_data(service, spreadsheet_id, sheet_name, start_row):
             for i in range(len(column_names)):
                 current_player[column_names[i]] = result['values'][0][i]
             all_data.append(current_player)
+            current_row += 1
         else:
             break
     return all_data
