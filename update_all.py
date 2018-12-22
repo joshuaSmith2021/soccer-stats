@@ -46,6 +46,55 @@ def get_sheets(service, spreadsheet_id):
         sheets.append(sheet['properties']['title'])
     return sheets
 
+def get_all_data(service, sheets):
+    get_letter = lambda x: chr(ord('a') + x).upper()
+    current_row = 0
+    all_data = {}
+    for sheet in sheets:
+        current_data = {}
+        if sheet[0] == '@' or sheet[0] == 'v':
+            pass
+        elif sheet == 'Record' :
+            pass
+        else:
+            # first get column names
+            current_dataset = []
+            column_names = []
+            current_column = 0
+            while True:
+                current_cell = get_letter(current_column) + str(current_row)
+                print('Getting cell ' + current_cell)
+                result = service.spreadsheets().get(
+                    spreadsheetId=spreadsheet_id,
+                    range=sheet + '!' + current_cell + ':' + current_cell).execute()
+                print('Cell received')
+                data_present = result.get('values') if result.get('values') is not None else None
+                if data_present:
+                    column_names.append(result['values'][0][0])
+                    current_column += 1
+                else:
+                    current_row += 1
+                    break
+
+            while True:
+                print('Getting row ' + str(current_row))
+                result = service.spreadsheets().get(
+                    spreadsheetId=spreadsheet_id,
+                    range=sheet + '!' + str(current_row) + ':' + str(current_row)).execute()
+                print('Row received')
+                data_present = result.get('values') if result.get('values') is not None else None
+                if data_present:
+                    current_player = {}
+                    for i in range(len(column_names)):
+                        current_player[column_names[i]] = result['values'][0][i]
+                    current_dataset.append(current_player)
+                    current_row += 1
+                else:
+                    break
+            all_data.append(current_dataset)
+    return all_data
+
+
 def get_data(service, spreadsheet_id, sheet_name, start_row):
     get_letter = lambda x: chr(ord('a') + x).upper()
     current_row = start_row
@@ -135,6 +184,7 @@ if __name__ == '__main__':
     service = get_authenticated_service()
 
     data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
+    data['data_sets'] = get_all_data(get_sheets(service, spreadsheet_id))
     data['player_data'] = get_player_data(service)
     data['player_count'] = player_count
     data['games_played'] = games_played
