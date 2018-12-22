@@ -64,7 +64,7 @@ def get_all_data(service, sheets):
             while True:
                 current_cell = get_letter(current_column) + str(current_row)
                 print('Getting cell ' + current_cell)
-                result = service.spreadsheets().get(
+                result = service.spreadsheets().values().get(
                     spreadsheetId=spreadsheet_id,
                     range=sheet + '!' + current_cell + ':' + current_cell).execute()
                 print('Cell received')
