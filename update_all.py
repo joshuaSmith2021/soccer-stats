@@ -46,6 +46,7 @@ def get_sheets(service, spreadsheet_id):
         sheets.append(sheet['properties']['title'])
     return sheets
 
+
 def get_all_data(service, sheets):
     get_letter = lambda x: chr(ord('a') + x).upper()
     all_data = {}
@@ -184,7 +185,7 @@ if __name__ == '__main__':
     service = get_authenticated_service()
 
     data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
-    data['data_sets'] = get_all_data(get_sheets(service, spreadsheet_id))
+    data['data_sets'] = get_all_data(service, get_sheets(service, spreadsheet_id))
     data['player_data'] = get_player_data(service)
     data['player_count'] = player_count
     data['games_played'] = games_played
