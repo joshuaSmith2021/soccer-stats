@@ -91,7 +91,7 @@ def get_all_data(service, sheets):
                     current_row += 1
                 else:
                     break
-            all_data.append(current_dataset)
+            all_data[sheet] = current_dataset
     return all_data
 
 
