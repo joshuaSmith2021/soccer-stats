@@ -35,12 +35,16 @@ API_VERSION = 'v4'
 spreadsheet_id = '1oF3lCVupGU_zSNX2gZv2IeeDQ05r3ttxFPyx5VYpT9Y'
 
 def get_sheets(service, spreadsheet_id):
+    # Get names of spreadsheets
+    sheets = []
+
     request = service.spreadsheets().get(
         spreadsheetId = spreadsheet_id
     )
     response = request.execute()
     for sheet in response['sheets']:
-        print(sheet['properties']['title'])
+        sheets.append(sheet['properties']['title'])
+    return sheets
 
 def get_data(service, spreadsheet_id, sheet_name, start_row):
     get_letter = lambda x: chr(ord('a') + x).upper()
