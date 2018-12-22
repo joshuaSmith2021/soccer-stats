@@ -40,7 +40,7 @@ def get_sheets(service, spreadsheet_id):
     )
     response = request.execute()
     for sheet in response['sheets']:
-        print(sheet['title'])
+        print(sheet['properties']['title'])
 
 def get_data(service, spreadsheet_id, sheet_name, start_row):
     get_letter = lambda x: chr(ord('a') + x).upper()
