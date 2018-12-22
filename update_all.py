@@ -48,7 +48,7 @@ def get_sheets(service, spreadsheet_id):
 
 def get_all_data(service, sheets):
     get_letter = lambda x: chr(ord('a') + x).upper()
-    current_row = 0
+    current_row = 1
     all_data = {}
     for sheet in sheets:
         current_data = {}
