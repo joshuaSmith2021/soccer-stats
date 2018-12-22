@@ -186,7 +186,6 @@ if __name__ == '__main__':
 
     data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
     data['data_sets'] = get_all_data(service, get_sheets(service, spreadsheet_id))
-    data['player_data'] = get_player_data(service)
     data['player_count'] = player_count
     data['games_played'] = games_played
     request_string = json.dumps(data)
