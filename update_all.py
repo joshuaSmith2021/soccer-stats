@@ -78,7 +78,7 @@ def get_all_data(service, sheets):
 
             while True:
                 print('Getting row ' + str(current_row))
-                result = service.spreadsheets().get(
+                result = service.spreadsheets().values().get(
                     spreadsheetId=spreadsheet_id,
                     range=sheet + '!' + str(current_row) + ':' + str(current_row)).execute()
                 print('Row received')
