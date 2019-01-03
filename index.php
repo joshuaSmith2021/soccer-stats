@@ -14,10 +14,10 @@ if (in_array($_GET['key'], $approved_keys)) {
 </head>
 <body>
   <div class="tabbar main roboto">
-    <div class="ripple tabbutton selected">
+    <div class="ripple tabbutton">
       Radar View
     </div>
-    <div class="ripple tabbutton">
+    <div class="ripple tabbutton selected">
       Table View
     </div>
     <div class="ripple tabbutton">
@@ -27,26 +27,13 @@ if (in_array($_GET['key'], $approved_keys)) {
   <div class="w3-padding roboto">
     <h2>Stats By Player</h2>
     <h6>Only players with at least one goal or one assist are shown.</h6>
-    <div class="tab" id="radarviewSection">
+    <div class="tab" id="radarviewSection" hidden>
+      <h4>This view is not yet supported.</h4>
       <div id="statsContainer"></div>
     </div>
-    <div class="tab" id="tableviewSection" hidden>
-      <table class="w3-table w3-bordered w3-striped w3-hoverable w3-large">
-        <thead>
-          <tr>
-            <th class="dataCol">Player</th>
-            <th class="dataCol">Goals</th>
-            <th class="dataCol">Assists</th>
-            <th class="dataCol">Points</th>
-            <th class="dataCol">Goals/Game</th>
-            <th class="dataCol">Assists/Game</th>
-            <th class="dataCol">Points/Game</th>
-          </tr>
-        </thead>
-        <tbody id="tableDisplay"></tbody>
-      </table>
-    </div>
+    <div class="tab" id="tableviewSection"></div>
     <div class="tab" id="graphviewSection" hidden>
+      <h4>This view is not yet supported.</h4>
       <div id="graphContainer"></div>
     </div>
   </div>
@@ -55,6 +42,6 @@ if (in_array($_GET['key'], $approved_keys)) {
 </body>
 </html>';
 } else {
-  header('Location: https://stat-display.herokuapp.com/enter/?failed=true');
+  header('Location: enter/?failed=true');
 }
 ?>

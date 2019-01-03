@@ -24,7 +24,7 @@ if ($_GET['failed'] == 'true') {
     <script type="text/javascript">
 document.getElementById('submitKey').addEventListener('click', function () {
   const userKey = document.getElementById('keyInput').value;
-  location.replace('https://stat-display.herokuapp.com/?key=' + userKey);
+  location.replace('../?key=' + userKey);
 });
     </script>
   </body>

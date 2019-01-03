@@ -178,9 +178,9 @@ if __name__ == '__main__':
     os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
     print('How many games have been played?')
-    games_played = raw_input()
+    games_played = input()
     print('How many players are on the team?')
-    player_count = raw_input()
+    player_count = input()
 
     service = get_authenticated_service()
 
