@@ -32,7 +32,6 @@ if (in_array($_GET['key'], $approved_keys)) {
     </div>
     <div class="tab" id="tableviewSection"></div>
     <div class="tab" id="graphviewSection" hidden>
-      <h4>This view is not yet supported.</h4>
       <div id="graphContainer"></div>
     </div>
   </div>
