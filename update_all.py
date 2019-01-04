@@ -34,6 +34,24 @@ API_VERSION = 'v4'
 # Spreadsheet data
 spreadsheet_id = '1oF3lCVupGU_zSNX2gZv2IeeDQ05r3ttxFPyx5VYpT9Y'
 
+def isfloat(x):
+    try:
+        a = float(x)
+    except ValueError:
+        return False
+    else:
+        return True
+
+def isint(x):
+    try:
+        a = float(x)
+        b = int(a)
+    except ValueError:
+        return False
+    else:
+        return a == b
+
+
 def get_sheets(service, spreadsheet_id):
     # Get names of spreadsheets
     sheets = []
@@ -87,7 +105,12 @@ def get_all_data(service, sheets):
                 if data_present:
                     current_player = {}
                     for i in range(len(column_names)):
-                        current_player[column_names[i]] = result['values'][0][i]
+                        if isint(result['values'][0][i]):
+                            current_player[column_names[i]] = int(result['values'][0][i])
+                        elif isfloat(result['values'][0][i]):
+                            current_player[column_names[i]] = float(result['values'][0][i])
+                        else:
+                            current_player[column_names[i]] = result['values'][0][i]
                     current_dataset.append(current_player)
                     current_row += 1
                 else:

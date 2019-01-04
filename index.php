@@ -28,7 +28,6 @@ if (in_array($_GET['key'], $approved_keys)) {
     <h2>Stats By Player</h2>
     <h6>Only players with at least one goal or one assist are shown.</h6>
     <div class="tab" id="radarviewSection" hidden>
-      <h4>This view is not yet supported.</h4>
       <div id="statsContainer"></div>
     </div>
     <div class="tab" id="tableviewSection"></div>
