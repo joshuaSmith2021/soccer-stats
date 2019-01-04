@@ -93,9 +93,9 @@ function makeTable (targetId, name, dataSet, cols) {
       let cell = document.createElement('TD');
       var value = dataSet[i][cols[j]];
       if (cols[j] !== 'Player') {
-        value = Math.round(dataSet[i][cols[j]] / 0.0001) * 0.0001;
+        value = String(Math.round(dataSet[i][cols[j]] / 0.0001) * 0.0001).substring(0, 6);
       }
-      cell.appendChild(document.createTextNode(String(value).substring(0, 6)));
+      cell.appendChild(document.createTextNode(value));
       current.appendChild(cell);
     }
     tbody.appendChild(current);
