@@ -6,10 +6,6 @@
   color: #ffffff;
 }
 
-/*#statsContainer, #graphContainer {
-  padding-bottom: 41px;
-}*/
-
 /*Buttons*/
 .fab {
   border: none;
@@ -68,6 +64,23 @@
   display: block;
   position: absolute;
   float: right;
+}
+
+/*Navbar*/
+.navbutton {
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.navbutton.special {
+  font-size: 25px;
+  font-family: Open Sans;
 }
 
 .tabbar {

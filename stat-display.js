@@ -150,13 +150,6 @@ function createRadars () {
     var row = document.createElement('DIV');
     row.className += 'w3-row';
     for (let j = 0; j < allData[Object.keys(allData)[i]].length; j++) {
-      if (j % 3 === 0 || j + 1 >= allData[Object.keys(allData)[i]].length) {
-        // Reset row
-        row.innerHTML;
-        document.getElementById('radarviewSection').appendChild(row);
-        row = document.createElement('DIV');
-        row.className += 'w3-row';
-      }
       var cell = document.createElement('DIV');
       cell.className += 'w3-col l4 m12';
       if (Object.keys(allData)[i] === 'Goals and Assists') {
@@ -171,6 +164,14 @@ function createRadars () {
         // cell.appendChild(makeRadar(allData['Goalkeeping'][j], ['Shots faced', 'Goals allowed', 'GAA']));
       }
       row.appendChild(cell);
+      if (((j + 1) % 3 === 0 && j !== 0) || j + 1 === allData[Object.keys(allData)[i]].length) {
+        // Reset row
+        row.innerHTML;
+        document.getElementById('radarviewSection').appendChild(row);
+        row = document.createElement('DIV');
+        row.className += 'w3-row';
+        console.log(j);
+      }
     }
   }
 }
@@ -218,13 +219,6 @@ function createGraphs () {
     var row = document.createElement('DIV');
     row.className += 'w3-row';
     for (let j = 0; j < allData[Object.keys(allData)[i]].length; j++) {
-      if (j % 3 === 0 || j + 1 >= allData[Object.keys(allData)[i]].length) {
-        // Reset row
-        row.innerHTML;
-        document.getElementById('graphviewSection').appendChild(row);
-        row = document.createElement('DIV');
-        row.className += 'w3-row';
-      }
       var cell = document.createElement('DIV');
       cell.className += 'w3-col l4 m12';
       if (Object.keys(allData)[i] === 'Goals and Assists') {
@@ -239,6 +233,14 @@ function createGraphs () {
         // cell.appendChild(makeRadar(allData['Goalkeeping'][j], ['Shots faced', 'Goals allowed', 'GAA']));
       }
       row.appendChild(cell);
+      if (((j + 1) % 3 === 0 && j !== 0) || j + 1 === allData[Object.keys(allData)[i]].length) {
+        // Reset row
+        row.innerHTML;
+        document.getElementById('graphviewSection').appendChild(row);
+        row = document.createElement('DIV');
+        row.className += 'w3-row';
+        console.log(j);
+      }
     }
   }
 }
