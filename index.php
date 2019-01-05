@@ -6,6 +6,7 @@ if (in_array($_GET['key'], $approved_keys)) {
   echo '<!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JV Stats</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
   <link rel="stylesheet" href="https://smith2021.github.io/hermes/w3.css">

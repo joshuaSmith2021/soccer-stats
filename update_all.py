@@ -119,46 +119,6 @@ def get_all_data(service, sheets):
     return all_data
 
 
-def get_data(service, spreadsheet_id, sheet_name, start_row):
-    get_letter = lambda x: chr(ord('a') + x).upper()
-    current_row = start_row
-    all_data = []
-    # First get column names
-    column_names = []
-    current_column = 0
-    while True:
-        current_cell = get_letter(current_column) + str(current_row)
-        print('Getting cell ' + current_cell)
-        result = service.spreadsheets().values().get(
-            spreadsheetId=spreadsheet_id,
-            range=sheet_name + '!' + current_cell + ':' + current_cell).execute()
-
-        print('Cell received')
-        data_present = result.get('values') if result.get('values') is not None else None
-        if data_present:
-            column_names.append(result['values'][0][0])
-            current_column += 1
-        else:
-            current_row += 1
-            break
-
-    while True:
-        print('Getting row ' + str(current_row))
-        result = service.spreadsheets().values().get(
-            spreadsheetId=spreadsheet_id,
-            range=sheet_name + '!' + str(current_row) + ':' + str(current_row)).execute()
-        data_present = result.get('values') if result.get('values') is not None else None
-        if data_present:
-            current_player = {}
-            for i in range(len(column_names)):
-                current_player[column_names[i]] = result['values'][0][i]
-            all_data.append(current_player)
-            current_row += 1
-        else:
-            break
-    return all_data
-
-
 def get_authenticated_service():
     print('Getting Google service')
     g_credentials = Credentials(
@@ -169,30 +129,6 @@ def get_authenticated_service():
         client_secret = SECRET_DATA['client_secret']
     )
     return build(API_SERVICE_NAME, API_VERSION, credentials = g_credentials)
-
-def get_player_data(service):
-    current_row = 2
-    player_data = []
-    print('Getting data')
-    while True:
-        print('Iteration #' + str(current_row - 1))
-        result = service.spreadsheets().values().get(
-            spreadsheetId=spreadsheet_id,
-            range='goalsandassists!' + str(current_row) + ':' + str(current_row)).execute()
-        print('Row received')
-        numRows = result.get('values') if result.get('values') is not None else None
-        if numRows:
-            row = result['values'][0]
-            player_data.append({
-                'playerName': row[0],
-                'goals': int(row[1]),
-                'assists': int(row[2]),
-                'points': int(row[3])
-            })
-            current_row += 1
-        else:
-            break
-    return player_data
 
 
 if __name__ == '__main__':
