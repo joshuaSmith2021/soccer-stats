@@ -128,7 +128,7 @@ function makeRadar (playerData, cols) {
           })()
         },
         {
-          label: 'Average Player',
+          label: 'Team Average',
           backgroundColor: 'rgb(23, 43, 208, 0.2)',
           borderColor: 'rgb(23, 43, 208)',
           data: (function () {
@@ -197,7 +197,7 @@ function makeGraph (playerData, cols) {
           })()
         },
         {
-          label: 'Average Player',
+          label: 'Team Average',
           backgroundColor: 'rgb(23, 43, 208, 0.2)',
           borderColor: 'rgb(23, 43, 208)',
           data: (function () {
