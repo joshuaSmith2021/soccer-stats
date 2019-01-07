@@ -87,7 +87,11 @@ if __name__ == '__main__':
     
     # get list of sheets
     sheets = get_sheets(service, spreadsheet_id)
-    jsoned = json.dumps(sheets)
+    games = []
+    for sheet in sheets:
+        if sheet[0] == '@' or sheet[0] == 'v':
+            games.append(sheet)
+    jsoned = json.dumps(games)
     
     update = post('https://stat-display.herokuapp.com/update-games.php?key=' + UPDATE_KEY, data={'json': jsoned})
     print(update.status_code)

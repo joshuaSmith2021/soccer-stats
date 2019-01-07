@@ -1,5 +1,18 @@
 .roboto{font-family:Roboto;}
 
+.dropdown {
+  padding: 8px;
+  border: none;
+  display: block;
+  border: none;
+  border-bottom: 1px;
+}
+
+.dropdown option {
+  color: #000000;
+  background-color: #ffffff;
+}
+
 /*Palette*/
 .main {
   background-color: #631a00;
