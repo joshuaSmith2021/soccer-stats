@@ -143,16 +143,18 @@ if __name__ == '__main__':
 
     service = get_authenticated_service()
 
-    data = json.loads(requests.get('https://stat-display.herokuapp.com/player_stats.json').text)
+    data = json.loads(open('player_stats.json').read())
     data['data_sets'] = get_all_data(service, get_sheets(service, spreadsheet_id))
     data['player_count'] = player_count
     data['games_played'] = games_played
     request_string = json.dumps(data)
 
-    print('Sending request')
+    file = open('player_stats.json', 'w')
+    file.write(request_string)
+    '''print('Sending request')
     update_request = requests.post('https://stat-display.herokuapp.com/update-stats.php?key=' + UPDATE_KEY, data=request_string)
     print('Reponse code:')
     print(update_request.status_code)
     print('=' * 20)
     print('Response:')
-    print(update_request.text)
+    print(update_request.text)'''
