@@ -93,6 +93,7 @@ if __name__ == '__main__':
             games.append(sheet)
     jsoned = json.dumps(games)
     
-    update = post('https://stat-display.herokuapp.com/update-games.php?key=' + UPDATE_KEY, data={'json': jsoned})
+    file = open('games.json', 'w')
+    '''update = post('https://stat-display.herokuapp.com/update-games.php?key=' + UPDATE_KEY, data={'json': jsoned})
     print(update.status_code)
-    print(update.text)
+    print(update.text)'''
