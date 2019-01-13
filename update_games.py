@@ -94,6 +94,7 @@ if __name__ == '__main__':
     jsoned = json.dumps(games)
     
     file = open('games.json', 'w')
+    file.write(jsoned)
     '''update = post('https://stat-display.herokuapp.com/update-games.php?key=' + UPDATE_KEY, data={'json': jsoned})
     print(update.status_code)
     print(update.text)'''
