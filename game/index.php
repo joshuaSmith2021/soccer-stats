@@ -36,7 +36,7 @@ Requests::register_autoloader();
 
 # check that a valid game is being requested
 $available_games = json_decode(file_get_contents('../games.json'));
-$game = $_GET['gname'];
+$game = html_entity_decode($_GET['gname']);
 if (!in_array($game, $available_games)) {
   die('Invalid game requested');
 }
