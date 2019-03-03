@@ -3,7 +3,7 @@ $approved_keys = [
   'butterfield'
 ];
 if (in_array($_GET['key'], $approved_keys)) {
-  echo '<!DOCTYPE html>
+  /*echo '<!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -185,5 +185,6 @@ function makeTable (targetElement, name, dataSet, cols) {
   </script>
 </body>
 </html>';
-}
+}*/
 ?>
+Sorry, but game view has been disabled for security purposes. Apologies for any inconvenience.
