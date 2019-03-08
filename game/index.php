@@ -1,5 +1,5 @@
 <?php
-/*$approved_keys = [
+$approved_keys = [
   'butterfield'
 ];
 if (in_array($_GET['key'], $approved_keys)) {
@@ -43,9 +43,9 @@ if (!in_array($game, $available_games)) {
 
 # get refresh token
 $data = array(
-  'refresh_token' => '1/-Id4L97BavH44WTml9cG9SR9qJcB9f_DvED8w9-UJCo',
-  'client_id' => '28407943286-2633kuv4qiv1aob1etfphidn5j60omr9.apps.googleusercontent.com',
-  'client_secret' => 'lW7V6MT-OSbk-FJUqsvR8dMe',
+  'refresh_token' => '<REFRESH_TOKEN>',
+  'client_id' => '<CLIENT_ID>',
+  'client_secret' => '<CLIENT_SECRET>',
   'grant_type' => 'refresh_token'
 );
 
@@ -185,6 +185,5 @@ function makeTable (targetElement, name, dataSet, cols) {
   </script>
 </body>
 </html>';
-}*/
+}
 ?>
-Sorry, but game view has been disabled for security purposes. Apologies for any inconvenience.
